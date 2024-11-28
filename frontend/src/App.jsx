@@ -1,6 +1,6 @@
 // Here we utilize the react router dom imports to be able to route to our pages
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/HomePage";
+import HomePage from "./pages/HomePage";
 import Header from "./components/Header";
 
 export default function App() {
@@ -8,7 +8,7 @@ export default function App() {
     <BrowserRouter>      
       <Header />
       <Routes>
-        <Route path="/" element={ <Home /> } />
+        <Route path="/" element={ <HomePage /> } />
       </Routes>
     </BrowserRouter>
   )
