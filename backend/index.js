@@ -4,9 +4,11 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const mongo_uri = process.env.MONGO
+
 mongoose
   .connect(
-    process.env.MONGO
+    mongo_uri
   )
   .then(() => {
     console.log("mongodb is connected");
