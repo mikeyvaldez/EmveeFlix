@@ -1,7 +1,7 @@
 import express from "express";
 import { check, validationResult } from "express-validator";
 // import prisma from "../db/index.js";     // convert to mongoose ********************************
-import bcrypt from "bcrypt";
+import bcryptjs from "bcryptjs";
 import JWT from "jsonwebtoken";
 import dotenv from "dotenv";
 
@@ -50,7 +50,7 @@ router.post(
     }
 
     // hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcryptjs.hash(password, 10);
 
     // save the user
     // const newUser = await prisma.user.create({                 // convert to mongoose***************************************
@@ -97,7 +97,7 @@ router.post("/login", async (req, res) => {
     });
   }
 
-  const isMatch = await bcrypt.compare(password, user.password);
+  const isMatch = await bcryptjs.compare(password, user.password);
 
   if (!isMatch) {
     return res.status(400).json({
