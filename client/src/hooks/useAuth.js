@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookie from "universal-cookie";
 import { useDispatch } from "react-redux";
-import { clearUser, setUser } from "../features/userSlice";
+import { clearUser, setUser } from "../redux/user/userSlice";
 
 const cookie = new Cookie();
 

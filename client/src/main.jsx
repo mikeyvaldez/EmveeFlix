@@ -1,31 +1,17 @@
-import ReactDOM from "react-dom/client";
-import App from "./App";
-import {
-  Route,
-  RouterProvider,
-  createBrowserRouter,
-  createRoutesFromElements,
-} from "react-router-dom";
-import { Provider } from "react-redux";
-import { store } from "./app/store";
+import { createRoot } from "react-dom/client";
 import "./index.css";
-import HomePage from "./pages/HomePage";
-// import LoginPage from "./pages/LoginPage";
-// import PlansPage from "./pages/PlansPage";
-// import BrowsePage from "./pages/BrowsePage";
-// import WatchPage from "./pages/WatchPage";
-// import PrivateRoutes from "./utils/PrivateRoutes";
+import App from "./App.jsx";
+import { store, persistor } from "./redux/store.js";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import ThemeProvider from "./components/ThemeProvider.jsx";
 
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<App />}>
-       <Route path="/" element={<HomePage />} />       
-     </Route>
-  )
-);
-
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={store}>
-    <RouterProvider router={router} />
-  </Provider>
+createRoot(document.getElementById("root")).render(
+  <PersistGate persistor={persistor}>
+    <Provider store={store}>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </Provider>
+  </PersistGate>
 );

@@ -1,23 +1,18 @@
+import { Avatar, Button, Dropdown, TextInput } from "flowbite-react";
+// import { Link, useLocation, useNavigate } from "react-router-dom"; // goes to page without refreshing page
+// import { AiOutlineSearch } from "react-icons/ai";
+// import { FaMoon, FaSun } from "react-icons/fa";
+// import { useSelector } from "react-redux";
+// import { toggleTheme } from "../redux/theme/themeSlice";
+// import { signoutSuccess } from "../redux/user/userSlice";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import useAuth from "../hooks/useAuth";
 
-const tabs = [
-  "Home",
-  "Series",
-  "Films",
-  "New & Popular",
-  "My List",
-  "Browse by Languages",
-];
-
-export default function NavBar() {
-  const { user, isLoading } = useSelector(
-    (state) => state.user.value
-  );
-  const { logout } = useAuth();
+export default function Header() {
+//   const { user, isLoading } = useSelector((state) => state.user.value)
   const [showBackground, setShowBackground] = useState(false);
-
+//   const { logout } = useAuth();
+  
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 700) {
@@ -41,22 +36,22 @@ export default function NavBar() {
           alt="logo"
         />
         <div className="flex gap-7 ml-8 mr-auto">
-          {tabs.map((tab) => (
-            <div
-              key={tab}
-              className="text-white hover:text-gray-300 cursor-pointer"
-            >
-              <p>{tab}</p>
-            </div>
-          ))}
+          <ul className="flex gap-4">
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/About">About</a>
+            </li>
+          </ul>
         </div>
-        {user && !isLoading && (
+        {/* {user && !isLoading && (
           <div>
             <div className="text-white hover:text-gray-300 cursor-pointer ml-auto">
               <p onClick={logout}>Logout</p>
             </div>
           </div>
-        )}
+        )} */}
       </div>
     </nav>
   );
