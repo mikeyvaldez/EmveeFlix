@@ -43,6 +43,9 @@ export default function Header() {
             <li>
                 <a href="/About">About</a>
             </li>
+            <li>
+                <a href="/About">About</a>
+            </li>
           </ul>
         </div>
         {/* {user && !isLoading && (
