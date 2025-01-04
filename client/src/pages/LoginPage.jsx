@@ -46,7 +46,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative bg-gray-700 h-screen w-screen bg-opacity-50">
+    <div className="h-screen w-screen bg-black">
       <Header />
       <div className="flex justify-center items-center h-full">
         <div className="bg-black bg-opacity-70 p-16 self-center mt-2 w-full max-w-md rounded-md">

@@ -1,5 +1,5 @@
 import { Avatar, Button, Dropdown, TextInput } from "flowbite-react";
-import { useNavigate } from "react-router-dom"; // goes to page without refreshing page
+import { Link, useNavigate } from "react-router-dom"; // goes to page without refreshing page
 // import { Link, useLocation } from "react-router-dom"; // goes to page without refreshing page
 // import { AiOutlineSearch } from "react-icons/ai";
 // import { FaMoon, FaSun } from "react-icons/fa";
@@ -10,11 +10,11 @@ import { useEffect, useState } from "react";
 // import useAuth from "../hooks/useAuth";
 
 export default function Header() {
-//   const { user, isLoading } = useSelector((state) => state.user.value)
+  //   const { user, isLoading } = useSelector((state) => state.user.value)
   const [showBackground, setShowBackground] = useState(false);
-//   const { logout } = useAuth();
+  //   const { logout } = useAuth();
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     window.addEventListener("scroll", () => {
       if (window.scrollY > 700) {
@@ -32,22 +32,27 @@ export default function Header() {
           showBackground ? "bg-black bg-opacity-90" : null
         }`}
       >
-        <img
-          className="h-8 hover:cursor-pointer"
-          src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
-          alt="logo"
-          onClick={() => navigate("/")}
-        />
+        <Link to="/" className="self-center text-sm sm:text-xl font-bold">
+          <span className="px-2 py-1 text-red-700 font-bold text-4xl">
+            EmveeFlix
+          </span>
+        </Link>
         <div className="flex gap-7 ml-8 mr-auto">
           <ul className="flex gap-4">
             <li>
-                <a href="/" className="text-white">Home</a>
+              <a href="/" className="text-white">
+                Home
+              </a>
             </li>
             <li>
-                <a href="/about" className="text-white">About</a>
+              <a href="/about" className="text-white">
+                About
+              </a>
             </li>
             <li>
-                <a href="/contact" className="text-white">Contact</a>
+              <a href="/contact" className="text-white">
+                Contact
+              </a>
             </li>
           </ul>
         </div>
