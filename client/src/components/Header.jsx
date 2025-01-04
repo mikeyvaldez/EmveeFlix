@@ -13,7 +13,7 @@ export default function Header() {
   //   const { user, isLoading } = useSelector((state) => state.user.value)
   const [showBackground, setShowBackground] = useState(false);
   //   const { logout } = useAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {

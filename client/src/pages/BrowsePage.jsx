@@ -1,7 +1,10 @@
-
+import Billboard from "../components/Billboard";
 
 export default function BrowsePage() {
-  return (
-    <div>BrowsePage</div>
-  )
-}
+    return (      
+      <div>
+        <Billboard />
+      </div>
+    );
+  }
+  
