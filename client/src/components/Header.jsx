@@ -1,5 +1,6 @@
 import { Avatar, Button, Dropdown, TextInput } from "flowbite-react";
-// import { Link, useLocation, useNavigate } from "react-router-dom"; // goes to page without refreshing page
+import { useNavigate } from "react-router-dom"; // goes to page without refreshing page
+// import { Link, useLocation } from "react-router-dom"; // goes to page without refreshing page
 // import { AiOutlineSearch } from "react-icons/ai";
 // import { FaMoon, FaSun } from "react-icons/fa";
 // import { useSelector } from "react-redux";
@@ -12,6 +13,7 @@ export default function Header() {
 //   const { user, isLoading } = useSelector((state) => state.user.value)
   const [showBackground, setShowBackground] = useState(false);
 //   const { logout } = useAuth();
+  const navigate = useNavigate();
   
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -31,9 +33,10 @@ export default function Header() {
         }`}
       >
         <img
-          className="h-8"
+          className="h-8 hover:cursor-pointer"
           src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Logonetflix.png"
           alt="logo"
+          onClick={() => navigate("/")}
         />
         <div className="flex gap-7 ml-8 mr-auto">
           <ul className="flex gap-4">

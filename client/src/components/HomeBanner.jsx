@@ -16,10 +16,18 @@ export default function HomeBanner() {
             </p>
             <div className="mt-8">
               <a
-                href="/login"
+                href="/sign-up"
                 className="bg-red-700 mt-8 text-white p-4 px-16 text-lg rounded font-semibold"
               >
                 Sign up
+              </a>
+            </div>
+            <div className="mt-8">
+              <a
+                href="/login"
+                className="bg-blue-700 mt-9 text-white p-4 px-16 text-lg rounded font-semibold"
+              >
+                Login
               </a>
             </div>
           </div>
