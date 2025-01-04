@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookie from "universal-cookie";
 import { useDispatch } from "react-redux";
-import { clearUser, setUser } from "../redux/user/userSlice";
+import { signoutSuccess, signInSuccess } from "../redux/user/userSlice";
 
 const cookie = new Cookie();
 
@@ -19,7 +19,7 @@ const useAuth = () => {
     const { token, user } = response.data;
     cookie.set("session_token", token);
     dispatch(
-      setUser({
+      signInSuccess({
         email: user.email,
         username: user.username,
       })
@@ -40,7 +40,7 @@ const useAuth = () => {
     const { token, user } = response.data;
     cookie.set("session_token", token);
     dispatch(
-      setUser({
+      signInSuccess({
         email: user.email,
         username: user.username,
       })
@@ -62,23 +62,23 @@ const useAuth = () => {
       const user = response.data;
 
       if (!user) {
-        return dispatch(clearUser());
+        return dispatch(signoutSuccess());
       }
 
       dispatch(
-        setUser({
+        signInSuccess({
           email: user.email,
           username: user.username,
         })
       );
     } catch (error) {
-      return dispatch(clearUser());
+      return dispatch(signoutSuccess());
     }
   };
 
   const logout = () => {
     cookie.remove("session_token");
-    return dispatch(clearUser());
+    return dispatch(signoutSuccess());
   };
 
   return { signup, login, logout, fetchUser };

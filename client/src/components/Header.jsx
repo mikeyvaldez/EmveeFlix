@@ -6,7 +6,7 @@ import { Avatar, Button, Dropdown, TextInput } from "flowbite-react";
 // import { toggleTheme } from "../redux/theme/themeSlice";
 // import { signoutSuccess } from "../redux/user/userSlice";
 import { useEffect, useState } from "react";
-import useAuth from "../hooks/useAuth";
+// import useAuth from "../hooks/useAuth";
 
 export default function Header() {
 //   const { user, isLoading } = useSelector((state) => state.user.value)
@@ -38,13 +38,13 @@ export default function Header() {
         <div className="flex gap-7 ml-8 mr-auto">
           <ul className="flex gap-4">
             <li>
-                <a href="/">Home</a>
+                <a href="/" className="text-white">Home</a>
             </li>
             <li>
-                <a href="/about">About</a>
+                <a href="/about" className="text-white">About</a>
             </li>
             <li>
-                <a href="/contact">Contact</a>
+                <a href="/contact" className="text-white">Contact</a>
             </li>
           </ul>
         </div>
