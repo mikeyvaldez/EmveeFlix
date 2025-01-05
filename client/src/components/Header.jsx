@@ -2,18 +2,20 @@ import { Avatar, Button, Dropdown, TextInput } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom"; // goes to page without refreshing page
 // import { Link, useLocation } from "react-router-dom"; // goes to page without refreshing page
 // import { AiOutlineSearch } from "react-icons/ai";
-// import { FaMoon, FaSun } from "react-icons/fa";
-// import { useSelector } from "react-redux";
-// import { toggleTheme } from "../redux/theme/themeSlice";
+import { FaMoon, FaSun } from "react-icons/fa";
+import { toggleTheme } from "../redux/theme/themeSlice";
 // import { signoutSuccess } from "../redux/user/userSlice";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 // import useAuth from "../hooks/useAuth";
 
 export default function Header() {
   //   const { user, isLoading } = useSelector((state) => state.user.value)
   const [showBackground, setShowBackground] = useState(false);
+  const { theme } = useSelector((state) => state.theme);
   //   const { logout } = useAuth();
   // const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -55,6 +57,14 @@ export default function Header() {
               </a>
             </li>
           </ul>
+          <Button
+          gradientDuoTone="greenToBlue"
+          className="w-12 h-10 hidden sm:inline"
+          pill
+          onClick={() => dispatch(toggleTheme())}
+        >
+          {theme === "light" ? <FaSun /> : <FaMoon />}          
+        </Button>
         </div>
         {/* {user && !isLoading && (
           <div>

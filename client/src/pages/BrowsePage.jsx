@@ -4,6 +4,9 @@ export default function BrowsePage() {
     return (      
       <div>
         <Billboard />
+        <div className="">
+          
+        </div>
       </div>
     );
   }
