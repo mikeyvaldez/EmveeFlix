@@ -6,16 +6,16 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { toggleTheme } from "../redux/theme/themeSlice";
 // import { signoutSuccess } from "../redux/user/userSlice";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 // import useAuth from "../hooks/useAuth";
 
 export default function Header() {
   //   const { user, isLoading } = useSelector((state) => state.user.value)
   const [showBackground, setShowBackground] = useState(false);
-  const { theme } = useSelector((state) => state.theme);
+  // const { theme } = useSelector((state) => state.theme);
   //   const { logout } = useAuth();
   // const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -30,16 +30,14 @@ export default function Header() {
   return (
     <nav className="w-full fixed z-40">
       <div
-        className={`px-16 py-6 flex items-center ${
-          showBackground ? "bg-black bg-opacity-90" : null
-        }`}
+        className={`px-16 py-6 flex items-center ${showBackground ? "bg-black bg-opacity-90" : null}`}
       >
         <Link to="/" className="self-center text-sm sm:text-xl font-bold">
           <span className="px-2 py-1 text-red-700 font-bold text-4xl">
             EmveeFlix
           </span>
         </Link>
-        <div className="flex gap-7 ml-8 mr-auto">
+        <div className="flex gap-7 ml-8 md:order-2">
           <ul className="flex gap-4">
             <li>
               <a href="/" className="text-white">
@@ -56,15 +54,7 @@ export default function Header() {
                 Contact
               </a>
             </li>
-          </ul>
-          <Button
-          gradientDuoTone="greenToBlue"
-          className="w-12 h-10 hidden sm:inline"
-          pill
-          onClick={() => dispatch(toggleTheme())}
-        >
-          {theme === "light" ? <FaSun /> : <FaMoon />}          
-        </Button>
+          </ul>                    
         </div>
         {/* {user && !isLoading && (
           <div>
