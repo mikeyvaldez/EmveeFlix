@@ -6,14 +6,13 @@ import { FaMoon, FaSun } from "react-icons/fa";
 import { toggleTheme } from "../redux/theme/themeSlice";
 // import { signoutSuccess } from "../redux/user/userSlice";
 import { useEffect, useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import useAuth from "../hooks/useAuth";
+import { useDispatch, useSelector } from "react-redux";
+import useAuth from "../hooks/useAuth";
 
 export default function Header() {
-  //   const { user, isLoading } = useSelector((state) => state.user.value)
-  const [showBackground, setShowBackground] = useState(false);
-  // const { theme } = useSelector((state) => state.theme);
-  //   const { logout } = useAuth();
+    // const { user, isLoading } = useSelector((state) => state.user.value)
+  const [showBackground, setShowBackground] = useState(false);  
+    const { logout } = useAuth();
   // const navigate = useNavigate();
   // const dispatch = useDispatch();
 
