@@ -1,7 +1,7 @@
 import express from "express";
 import { check, validationResult } from "express-validator";
-import prisma from "../db/index.js";
-import bcrypt from "bcrypt";
+import User from "../models/user.model.js"
+import bcryptjs from "bcryptjs";
 import JWT from "jsonwebtoken";
 
 const router = express.Router();
@@ -33,11 +33,7 @@ router.post(
 
     const { email, password, username } = req.body;
 
-    const user = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
+    const user = await User.findOne({ email });
 
     // validate that the user doesn't already exist
     if (user) {
@@ -47,21 +43,10 @@ router.post(
     }
 
     // hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcryptjs.hash(password, 10);
 
     // save the user
-    const newUser = await prisma.user.create({
-      data: {
-        email,
-        username,
-        password: hashedPassword,
-      },
-      select: {
-        id: true,
-        username: true,
-        email: true,
-      },
-    });
+    const newUser = new User({ username, email, password: hashedPassword });
 
     // create json web token and referncing environment variable for security purposes
     const token = await JWT.sign(newUser, process.env.JSON_WEB_TOKEN_SECRET, {
@@ -82,11 +67,7 @@ router.post(
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-  });
+  const user = await User.findOne({ email });
 
   if (!user) {
     return res.status(400).json({
@@ -94,7 +75,7 @@ router.post("/login", async (req, res) => {
     });
   }
 
-  const isMatch = await bcrypt.compare(password, user.password);
+  const isMatch = await bcryptjs.compare(password, user.password);
 
   if (!isMatch) {
     return res.status(400).json({
@@ -135,16 +116,7 @@ router.get("/me", async (req, res) => {
     return res.send(null);
   }
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email: payload.email
-    },
-    select: {
-      id: true,
-      email: true,
-      username: true
-    }
-  });
+  const user = await User.find({ email: payload.email });
 
   return res.json(user);
 })
