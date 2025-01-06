@@ -32,7 +32,7 @@ const useAuth = () => {
     password,
     username,
   }) => {
-    const response = await axios.post("http://localhost:8080/auth/signup", {
+    const response = await axios.post("http://localhost:8080/auth/sign-up", {
       email,
       password,
       username,

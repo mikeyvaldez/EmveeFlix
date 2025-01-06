@@ -26,7 +26,7 @@ export default function LoginPage() {
     }
     try {
       dispatch(signInStart());
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch("/api/auth/sign-up", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -45,20 +45,43 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="h-screen w-screen bg-black">      
+    <div className="h-screen w-screen bg-black">
       <div className="flex justify-center items-center h-full">
         <div className="bg-black bg-opacity-70 p-16 self-center mt-2 w-full max-w-md rounded-md">
           <h2 className="text-white text-4xl mb-8 font-semibold">Sign Up</h2>
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <TextInput type="text" placeholder="Username" id="username" />
-            <TextInput type="email" placeholder="Email Address" id="email" />
-            <TextInput type="password" placeholder="Password" id="password" />
+            <TextInput
+              type="text"
+              placeholder="Username"
+              id="username"
+              onChange={handleChange}
+            />
+            <TextInput
+              type="email"
+              placeholder="Email Address"
+              id="email"
+              onChange={handleChange}
+            />
+            <TextInput
+              type="password"
+              placeholder="Password"
+              id="password"
+              onChange={handleChange}
+            />
             <Button
               gradientDuoTone="pinkToOrange"
-              type="submit"              
+              type="submit"
               className="font-bold"
+              disabled={loading}
             >
-              Submit
+              {loading ? (
+                <>
+                  <Spinner size="sm" />
+                  <span className="pl-3">Loading...</span>
+                </>
+              ) : (
+                "Sign Up"
+              )}
             </Button>
           </form>
           <div className="flex gap-2 text-sm mt-5">

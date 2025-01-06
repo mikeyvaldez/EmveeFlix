@@ -10,7 +10,7 @@ const router = express.Router();
 // this post request creates a new user
 router.post(
   // validate input
-  "/signup",
+  "/sign-up",
   [
     check("email", "Please input a valid email").isEmail(),
     check(

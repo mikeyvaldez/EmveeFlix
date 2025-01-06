@@ -20,7 +20,7 @@ app.use("", Movies);
 app.use("/auth", Auth);
 app.use("/sub", Sub);
 
-dotenv.config({ path: "../.env" });
+dotenv.config({ path: ".env" });
 
 const mongo_url = process.env.MONGO;
 const port = process.env.PORT || 8080;

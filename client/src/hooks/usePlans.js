@@ -59,4 +59,4 @@ const initialState = {
     return { data, loading, error };
   };
   
-  
+  export default usePlans;
