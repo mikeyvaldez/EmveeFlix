@@ -21,7 +21,7 @@ app.use("", Movies);
 app.use("/auth", Auth);
 app.use("/sub", Sub);
 
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 
 
 // listen on port
