@@ -1,4 +1,4 @@
-[
+export const movies = [
     {
       "id": "1",
       "title": "Breaking Bad",
@@ -720,3 +720,5 @@
       "genre": "Drama"
     }
   ]
+
+  
