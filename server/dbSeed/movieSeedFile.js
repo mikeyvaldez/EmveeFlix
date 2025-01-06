@@ -40,7 +40,7 @@ mongoose
   .connect(mongo_url)
   .then(() => {
     console.log("mongodb is connected");
-    importData();
+    // importData();
     // deleteData();
   })
   .catch((err) => {
