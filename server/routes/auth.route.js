@@ -3,60 +3,64 @@ import { check, validationResult } from "express-validator";
 import User from "../models/user.model.js"
 import bcryptjs from "bcryptjs";
 import JWT from "jsonwebtoken";
+import dotenv from "dotenv";
+
+dotenv.config({ path: "../../.env" });
 
 const router = express.Router();
+
 
 // post requests create data
 // this post request creates a new user
 router.post(
-  // validate input
-  "/sign-up",
-  [
-    check("email", "Please input a valid email").isEmail(),
-    check(
-      "password",
-      "Please input a password with a min length of 6"
+    // validate input
+    "/signup",
+    [
+        check("email", "Please input a valid email").isEmail(),
+        check(
+            "password",
+            "Please input a password with a min length of 6"
+        ).isLength({ min: 6 }),
+        check(
+            "username",
+            "Please input a username with a min length of 6"
     ).isLength({ min: 6 }),
-    check(
-      "username",
-      "Please input a username with a min length of 6"
-    ).isLength({ min: 6 }),
-  ],
+],
   async (req, res) => {
-    const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-      return res.status(400).json({
-        errors: errors.array(),
-      });
-    }
-
-    const { email, password, username } = req.body;
-
-    const user = await User.findOne({ email });
-
-    // validate that the user doesn't already exist
-    if (user) {
-      return res.status(400).json({
+      const errors = validationResult(req);
+      
+      if (!errors.isEmpty()) {
+          return res.status(400).json({
+              errors: errors.array(),
+            });
+        }
+        
+        const { email, password, username } = req.body;
+        
+        const user = await User.findOne({ email });
+        
+        // validate that the user doesn't already exist
+        if (user) {
+            return res.status(400).json({
         errors: [{ msg: "This user already exists" }],
       });
     }
-
+    
     // hash the password
     const hashedPassword = await bcryptjs.hash(password, 10);
-
+    
     // save the user
-    const newUser = new User({ username, email, password: hashedPassword });
-
+    const newUser = new User({ username, email, password: hashedPassword });    
+    
     // create json web token and referncing environment variable for security purposes
-    const token = await JWT.sign(newUser, process.env.JSON_WEB_TOKEN_SECRET, {
-      expiresIn: 3600000,
+    const token = await JWT.sign(newUser.toJSON(), process.env.JWT_SECRET_KEY, {
+        expiresIn: 3600000,
     });
-
+    
     // return JWT
     return res.json({
-      user: newUser,
-      token,
+        user: newUser,
+        token,
     });
   }
 );
@@ -91,7 +95,7 @@ router.post("/login", async (req, res) => {
 
   const token = await JWT.sign(
     userPayload,
-    process.env.JSON_WEB_TOKEN_SECRET,
+    process.env.JWT_SECRET_KEY,
     { expiresIn: 3600000 }
   );
 

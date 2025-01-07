@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 const PrivateRoutes = () => {
   const { user, isLoading } = useSelector(
-    (state) => state.user.value
+    (state) => state.user
   );
 
   if (isLoading) return <div>Loading...</div>;

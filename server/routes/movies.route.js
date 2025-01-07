@@ -1,12 +1,12 @@
 import express from "express";
 import Movie from "../models/movie.model.js";
-import checkAuth from "../middleware/index.js";
+import { verifyToken } from "../utils/verifyUser.js";
 import fetchSubscription from "../services/fetchSubscription.js";
 
 const router = express.Router();
 
 // movie list page
-router.get("/movies/list", checkAuth, async (req, res) => {
+router.get("/movies/list", verifyToken, async (req, res) => {
   const subscription = await fetchSubscription(req.user.email);
 
   if (!subscription) {
@@ -30,7 +30,7 @@ router.get("/movies/list", checkAuth, async (req, res) => {
   return res.json({ movies, count });
 });
 
-router.get("/movie/:id", checkAuth, async (req, res) => {
+router.get("/movie/:id", verifyToken, async (req, res) => {
   const subscription = await fetchSubscription(req.user.email);
 
   if (!subscription) {

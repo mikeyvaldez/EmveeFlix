@@ -5,7 +5,7 @@
 // import express router
 import express from "express";
 import stripe from "../utils/stripe.js";
-import checkAuth from "../middleware/index.js";
+import { verifyToken } from "../utils/verifyUser.js";
 import fetchSubscription from "../services/fetchSubscription.js";
 
 const router = express.Router();
@@ -52,7 +52,7 @@ router.post("/session", async (req, res) => {
   return res.json(session);
 });
 
-router.get("/subscription", checkAuth, async (req, res) => {
+router.get("/subscription", verifyToken, async (req, res) => {
   const response = await stripe.customers.search({
     query: `email: \'${req.user.email}\'`,
   });

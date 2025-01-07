@@ -65,7 +65,7 @@ export default function PlanCard({
           </div>
         )}
         <div className="ml-3">
-          <h3 className="text-gray-600">South Park</h3>
+          <h3 className="text-gray-600">Trailer Park Boys</h3>
           <h3 className="font-semibold">Included</h3>
         </div>
       </div>
