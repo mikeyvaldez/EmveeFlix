@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import Movie from "../models/movie.model.js";
-import { movies } from "./movies.js";
+import movies from "./movies.json" assert { type: "json" };
+import SoloMovie from "../models/movie.model.js";
 
 dotenv.config({ path: "../../.env" });
 
@@ -17,7 +17,7 @@ const mongo_url = process.env.MONGO;
 // Import the data to DB
 const importData = async () => {
   try {
-    await Movie.create(movies);
+    await SoloMovie.create(movies);
     console.log("Data successfully imported");
     process.exit();
   } catch (err) {
@@ -28,7 +28,7 @@ const importData = async () => {
 // Delete the data from DB
 const deleteData = async () => {
   try {
-    await Movie.deleteMany();
+    await SoloMovie.deleteMany();
     console.log("Data successfully deleted");
     process.exit();
   } catch (err) {
@@ -40,8 +40,8 @@ mongoose
   .connect(mongo_url)
   .then(() => {
     console.log("mongodb is connected");
-    importData();
-    // deleteData();
+    importData(); // seed data
+    // deleteData();  // delete data
   })
   .catch((err) => {
     console.log(err);

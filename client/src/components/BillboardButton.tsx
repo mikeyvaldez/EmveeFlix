@@ -1,8 +1,11 @@
 import { PlayIcon } from "@heroicons/react/24/solid";
-import PropTypes from "prop-types";
 
+interface BillboardButtonProps {
+  text: string;
+  theme: "light" | "dark";
+}
 
-export default function BillboardButton({ text, theme }) {
+export default function BillboardButton({ text, theme }: BillboardButtonProps) {
   return (
     <button
       className={`${
@@ -17,9 +20,4 @@ export default function BillboardButton({ text, theme }) {
       </p>
     </button>
   );
-}
-
-BillboardButton.propTypes = {
-    text: PropTypes.string,
-    theme: PropTypes.string,
 }

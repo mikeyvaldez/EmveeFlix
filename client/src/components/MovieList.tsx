@@ -1,7 +1,13 @@
-import PropTypes from "prop-types";
+import { Movie } from "../types";
 import MovieCard from "./MovieCard";
 
-export default function MovieList({ movies, lastElementRef }) {
+export default function MovieList({
+  movies,
+  lastElementRef,
+}: {
+  movies: Movie[];
+  lastElementRef: (node: HTMLDivElement) => void;
+}) {
   return (
     <div className="px-12 mt-4 space-y-8">
       <div>
@@ -20,9 +26,4 @@ export default function MovieList({ movies, lastElementRef }) {
       </div>
     </div>
   );
-}
-
-MovieList.propTypes = {
-    movies: PropTypes.object,
-    lastElementRef: PropTypes.string
 }
