@@ -1,42 +1,51 @@
 import User from "../models/user.model.js";
+import { validationResult } from "express-validator";
+import dotenv from "dotenv";
 import bcryptjs from "bcryptjs";
-import jwt from "jsonwebtoken";
-import { check } from "express-validator";
-import { handleValidationErrors } from "../utils/validation.js"
+import { generateTokenAndSetCookie } from "../utils/generateToken.js"
+
+dotenv.config({ path: "../../.env" });
 
 
-export const validateSignup = [
-    check('username')
-      .exists({ checkFalsy: true })
-      .isLength({ min: 4 })
-      .withMessage('Please provide a username with at least 4 characters.'),
-    check('username')
-      .not()
-      .isEmail()
-      .withMessage('Username cannot be an email.'),
-    check('email')
-      .exists({ checkFalsy: true })
-      .isEmail()
-      .withMessage('Please provide a valid email.'),    
-    check('password')
-      .exists({ checkFalsy: true })
-      .isLength({ min: 6 })
-      .withMessage('Password must be 6 characters or more.'),
-    handleValidationErrors    
-  ];
+// user signup ----------------------------------------------------------------------
+export async function signup(req, res) {
+  const errors = validationResult(req);
 
-export async function signup(req, res){
-    const { username, email, password } = req.body;
+  if (!errors.isEmpty()) {
+    return res.status(400).json({
+      errors: errors.array(),
+    });
+  }
 
-    // const emailAlreadyExists = await User.findOne({ email });
+  const { email, password, username } = req.body;
 
-    // if(emailAlreadyExists){
-    //     res.status(403);
-    //     res.json({
-    //         message: "User already exists",
-    //     })
-    // }
+  const user = await User.findOne({ email });
 
-    const user = await User.signup({ username, email, password })
+  if (user) {
+    return res.status(400).json({
+      errors: [{ msg: "This user already exists" }],
+    });
+  }
+  const salt = await bcryptjs.genSalt(10);
+  const hashedPassword = await bcryptjs.hash(password, salt);
 
+  const newUser = new User({
+    username,
+    email,
+    password: hashedPassword,
+  });
+
+  generateTokenAndSetCookie(newUser._id, res);
+  await newUser.save();
+
+  res.status(201).json({
+    success: true,
+    user: {
+      ...newUser._doc,
+      password: "",
+    },
+  });
 }
+// end of user signup -------------------------------------------------------------------------
+
+// ser
