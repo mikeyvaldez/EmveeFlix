@@ -1,12 +1,25 @@
 import express from "express";
-import cors from "cors";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import auth from "./routes/auth.js"
+
+dotenv.config();
+
+
+const port = process.env.PORT || 8080;
 
 
 const app = express();
-app.use(express.json())
-app.use(cors())
+app.use(express.json());
+app.use(cookieParser);
 
-app.get("/", (req, res) => {
-    return res.send("HELLO WORLD!!");
+
+app.use("/api/auth", auth);
+
+
+
+
+app.listen(port, () => {
+    console.log(`Server is running on PORT ${port}`);
 });
 

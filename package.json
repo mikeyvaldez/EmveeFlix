@@ -2,6 +2,7 @@
   "name": "fullstackemveeflix",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "dev": "nodemon server/index.js",
     "start": "node server/index.js"
@@ -15,7 +16,7 @@
   },
   "dependencies": {
     "bcrpyt": "^2.0.0",
-    "cors": "^2.8.5",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "express-validator": "^7.2.1",
