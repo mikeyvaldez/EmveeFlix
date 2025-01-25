@@ -17,9 +17,6 @@ mongoose.connect(mongo_url).then(() => {
 const app = express();
 app.use(express.json());
 
-// app.get("/test", (req, res) => {
-//     res.json({ message: "you"})
-// })
 
 app.use("/api/auth", auth);
 

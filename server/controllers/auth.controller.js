@@ -2,10 +2,9 @@ import User from "../models/user.model.js";
 import { validationResult } from "express-validator";
 import dotenv from "dotenv";
 import bcryptjs from "bcryptjs";
-import { generateTokenAndSetCookie } from "../utils/generateToken.js"
+import { generateTokenAndSetCookie } from "../utils/generateToken.js";
 
 dotenv.config({ path: "../../.env" });
-
 
 // user signup ----------------------------------------------------------------------
 export async function signup(req, res) {
@@ -48,4 +47,37 @@ export async function signup(req, res) {
 }
 // end of user signup -------------------------------------------------------------------------
 
-// ser
+// user login -----------------------------------------------------------------------------------
+export async function login(req, res) {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.status(400).json({
+      errors: [{ msg: "Invalid credentials" }],
+    });
+  }
+
+  const isMatch = await bcryptjs.compare(password, user.password);
+
+  if (!isMatch) {
+    return res.status(400).json({
+      errors: [{ msg: "Invalid credentials" }],
+    });
+  }
+
+  const userPayload = {
+    ...user._doc,
+    password: "",
+  };
+
+  generateTokenAndSetCookie(user._id, res);
+
+  res.status(200).json({
+    success: true,
+    user: userPayload
+  });
+}
+// end of user login ----------------------------------------------------------------
+
