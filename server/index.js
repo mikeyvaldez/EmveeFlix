@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import auth from "./routes/auth.js"
 import mongoose from "mongoose";
 
+
 dotenv.config({ path: "../.env" });
 
 const mongo_url = process.env.MONGO;
@@ -22,7 +23,7 @@ app.use("/api/auth", auth);
 
 
 app.listen(port, () => {
-    console.log(`Server is running on PORT ${port}`);
+    console.log(`Server is running on PORT ${port}`);    
 });
 
 app.use((err, req, res, next) => {
