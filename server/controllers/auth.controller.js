@@ -2,7 +2,6 @@ import User from "../models/user.model.js";
 import { validationResult } from "express-validator";
 import dotenv from "dotenv";
 import bcryptjs from "bcryptjs";
-import JWT from "jsonwebtoken";
 import { generateTokenAndSetCookie } from "../utils/generateToken.js";
 
 dotenv.config({ path: "../../.env" });
@@ -42,7 +41,7 @@ export async function signup(req, res) {
     success: true,
     user: {
       ...newUser._doc,
-      password: "",
+      password: hashedPassword,
     },
   });
 }
@@ -94,23 +93,3 @@ export async function logout(req, res) {
 }
 // end of user logout ---------------------------------------------------------------------------
 
-// authentication check -----------------------------------------------------------------------
-export async function me(req, res) {
-  const bearerToken = req.headers.authorization;
-  if (!bearerToken) return res.send(null);
-  const jwt = bearerToken.split("Bearer ")[1];
-  if (!jwt) return res.send(null);
-
-  let payload;
-  
-  try {
-    payload = await JWT.verify(jwt, process.env.JWT_SECRET_KEY);
-  } catch (error) {
-    return res.send(null);
-  }
-
-  const user = await User.findOne({ email });
-
-  return res.json(user);
-}
-// end of authentication check ------------------------------------------------------------------
