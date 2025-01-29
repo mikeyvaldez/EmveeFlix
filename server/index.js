@@ -1,38 +1,25 @@
 import express from "express";
+import cors from "cors";
+import authRoutes from "./routes/auth.js";
+import moviesRoutes from "./routes/movies.js";
 import dotenv from "dotenv";
-import auth from "./routes/auth.js"
-import mongoose from "mongoose";
 
-
-dotenv.config({ path: "../.env" });
-
-const mongo_url = process.env.MONGO;
-const port = process.env.PORT || 8080;
-
-mongoose.connect(mongo_url).then(() => {
-    console.log("mongodb is connected");
-}).catch((err) => {
-    console.log(err);
-})
+dotenv.config({ path:"../.env" });
+const port = process.env.PORT;
 
 const app = express();
+
 app.use(express.json());
+app.use(cors());
 
-
-app.use("/api/auth", auth);
-
-
-app.listen(port, () => {
-    console.log(`Server is running on PORT ${port}`);    
+app.get("/", (req, res) => {
+  return res.send("HELLO WORLD");
 });
 
-app.use((err, req, res, next) => {
-    const statusCode = err.statusCode || 500;
-    const message = err.message || "Internal Server Error";
-    res.status(statusCode).json({
-      success: false,
-      statusCode,
-      message,
-    });
-  });
-  
+app.use("/api", moviesRoutes);
+app.use("/api/auth", authRoutes);
+// app.use("/api/sub", require("./routes/sub"));
+
+app.listen(8080, () => {
+  console.log(`Now listening on PORT ${port}`);
+});
