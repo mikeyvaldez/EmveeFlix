@@ -53,7 +53,7 @@ const usePlans = () => {
   const fetchPlansList = async () => {
     dispatch({ type: ActionType.LOADING });
     try {
-      const response = await axios.get(`http://localhost:8080/api/sub/products`);
+      const response = await axios.get('/api/sub/products');
       dispatch({ type: ActionType.SUCCESS, payload: response.data });
     } catch (error) {
       dispatch({ type: ActionType.FAILED, payload: "Something went wrong" });

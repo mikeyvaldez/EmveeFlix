@@ -6,7 +6,7 @@ import subRoutes from "./routes/sub.js";
 import dotenv from "dotenv";
 
 dotenv.config({ path:"../.env" });
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 
 const app = express();
 
@@ -21,6 +21,6 @@ app.use("/api", moviesRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/sub", subRoutes);
 
-app.listen(8080, () => {
+app.listen(port, () => {
   console.log(`Now listening on PORT ${port}`);
 });

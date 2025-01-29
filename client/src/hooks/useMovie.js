@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from "react";
 import axios from "axios";
 
+
 const initialState = {
   data: null,
   error: null,
@@ -51,7 +52,7 @@ const useMovie = (id) => {
   const fetchMovie = async () => {
     dispatch({ type: ActionType.LOADING });
     try {
-      const response = await axios.get(`http://localhost:8080/api/movie/${id}`);
+      const response = await axios.get(`/api/movie/${id}`);
       dispatch({ type: ActionType.SUCCESS, payload: response.data });
     } catch (error) {
       dispatch({ type: ActionType.FAILED, payload: "Something went wrong" });

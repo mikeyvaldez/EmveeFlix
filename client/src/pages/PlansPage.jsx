@@ -5,7 +5,7 @@ import PlanCard from "../components/PlanCard";
 import usePlans from "../hooks/usePlans";
 
 const createSession = async (email, priceId) => {
-  const response = await axios.post("http://localhost:8080/api/sub/session", {
+  const response = await axios.post("/api/sub/session", {
     email,
     priceId,
   });

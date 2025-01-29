@@ -16,9 +16,6 @@ export default function BrowsePage() {
     (state) => state.user.value
   );
 
-//   console.log({ isLoading, user });
-  // console.log(data)
-
   const lastElementRef = useCallback(
     (node) => {
       if (loading) return;
@@ -27,7 +24,7 @@ export default function BrowsePage() {
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
           setOffset(offset + 12);
-          console.log("intersecting");
+          // console.log("intersecting");
         }
       });
 

@@ -21,8 +21,7 @@ router.get("/products", async (req, res) => {
         id: default_price.id,
       },
     };
-  });
-  console.log(products)
+  });  
 
   return res.json(products);
 });

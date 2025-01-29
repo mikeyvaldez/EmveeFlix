@@ -51,7 +51,7 @@ const useMoviesList = (offset) => {
     dispatch({ type: ActionType.LOADING });
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/movies/list?offset=${offset}`
+        `/api/movies/list?offset=${offset}`
       );
       
        // Check if the data exists in the response
