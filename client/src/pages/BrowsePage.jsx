@@ -17,7 +17,7 @@ export default function BrowsePage() {
   );
 
 //   console.log({ isLoading, user });
-  console.log(data)
+  // console.log(data)
 
   const lastElementRef = useCallback(
     (node) => {

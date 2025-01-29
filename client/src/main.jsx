@@ -8,6 +8,7 @@ import BrowsePage from './pages/BrowsePage.jsx'
 import { Provider } from 'react-redux'
 import { store } from "./store/store.js"
 import WatchPage from './pages/WatchPage.jsx'
+import PlansPage from './pages/PlansPage.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
       <Route path="/login" element={<LoginPage />} />      
       <Route path="/browse" element={<BrowsePage />} />      
       <Route path="/browse/watch/:id" element={<WatchPage />} />
+      <Route path="/plans" element={<PlansPage />} />
     </Route>
   )
 )

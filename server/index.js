@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.js";
 import moviesRoutes from "./routes/movies.js";
+import subRoutes from "./routes/sub.js";
 import dotenv from "dotenv";
 
 dotenv.config({ path:"../.env" });
@@ -18,7 +19,7 @@ app.get("/", (req, res) => {
 
 app.use("/api", moviesRoutes);
 app.use("/api/auth", authRoutes);
-// app.use("/api/sub", require("./routes/sub"));
+app.use("/api/sub", subRoutes);
 
 app.listen(8080, () => {
   console.log(`Now listening on PORT ${port}`);

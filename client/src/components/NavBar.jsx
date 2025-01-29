@@ -31,6 +31,11 @@ export default function NavBar() {
     });
   }, []);
 
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  }  
+
   return (    
     <nav className="w-full fixed z-40">
       <div
@@ -57,7 +62,7 @@ export default function NavBar() {
         {user && !isLoading && (
           <div>
             <div className="text-white hover:text-gray-300 cursor-pointer ml-auto">
-              <p onClick={logout}>Logout</p>              
+              <p onClick={handleLogout}>Logout</p>              
             </div>
           </div>
         )}
