@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
-// import useAuth from "./hooks/useAuth";
-// import { useEffect } from "react";
+import useAuth from "./hooks/useAuth";
+import { useEffect } from "react";
 
 function App() {
-  // const { fetchUser } = useAuth();
+  const { fetchUser } = useAuth();
 
-  // useEffect(() => {
-  //   fetchUser();
-  // }, []);
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <div>
