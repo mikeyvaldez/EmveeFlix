@@ -6,7 +6,7 @@ import subRoutes from "./routes/sub.js";
 import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
-
+import path from 'path';
 
 dotenv.config({ path:"../.env" });
 const port = process.env.PORT || 8080;
