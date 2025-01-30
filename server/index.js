@@ -4,6 +4,7 @@ import authRoutes from "./routes/auth.js";
 import moviesRoutes from "./routes/movies.js";
 import subRoutes from "./routes/sub.js";
 import dotenv from "dotenv";
+import path from "path";
 
 
 dotenv.config({ path:"../.env" });
@@ -19,6 +20,12 @@ app.use(cors());
 app.use("/api", moviesRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/sub", subRoutes);
+
+app.use(express.static(path.join(__dirname, "/client/dist")))
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 
 app.listen(port, () => {

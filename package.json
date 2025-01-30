@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon server/index.js",
     "start": "node server/index.js",
-    "build": "npm install && npx prisma generate"
+    "build": "npm install && npx prisma generate && --prefix client && npm run build --prefix client"
   },
   "keywords": [],
   "author": "",
