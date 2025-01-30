@@ -37,8 +37,8 @@ router.post("/session", async (req, res) => {
         quantity: 1,
       },
     ],
-    success_url: "http://localhost:5173/browse",
-    cancel_url: "http://localhost:5173/plans",
+    success_url: "https://emveeflix.onrender.com/browse",
+    cancel_url: "https://emveeflix.onrender.com//plans",
     customer_email: email,
   });
 
