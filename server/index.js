@@ -23,9 +23,10 @@ app.use("/api/sub", subRoutes);
 // __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+console.log(__dirname)
 
 // Serve the static frontend build files
-app.use(express.static(path.join(__dirname, "client", "dist")));
+app.use(express.static(path.join(__dirname, "client/dist")));
 
 // Serve the React app for all other routes (single-page app fallback)
 app.get("*", (req, res) => {
