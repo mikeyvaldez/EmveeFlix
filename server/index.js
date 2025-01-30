@@ -5,7 +5,8 @@ import moviesRoutes from "./routes/movies.js";
 import subRoutes from "./routes/sub.js";
 import dotenv from "dotenv";
 import { fileURLToPath } from 'url';
-import { dirname, path } from 'path';
+import { dirname } from 'path';
+import path from 'path';
 
 
 
