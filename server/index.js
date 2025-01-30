@@ -4,6 +4,8 @@ import authRoutes from "./routes/auth.js";
 import moviesRoutes from "./routes/movies.js";
 import subRoutes from "./routes/sub.js";
 import dotenv from "dotenv";
+import path from "path";
+
 
 dotenv.config({ path:"../.env" });
 const port = process.env.PORT || 8080;
