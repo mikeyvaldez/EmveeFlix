@@ -3,6 +3,10 @@ import { check, validationResult } from "express-validator";
 import { prisma } from "../db/index.js";
 import bcryptjs from "bcryptjs";
 import JWT from "jsonwebtoken";
+import checkAuth from "../middleware/index.js"
+
+import dotenv from "dotenv";
+dotenv.config({ path: "../../.env" });
 
 const router = express.Router();
 
@@ -100,14 +104,40 @@ router.post("/login", async (req, res) => {
     username: user.username,
   };
 
-  const token = await JWT.sign(userPayload, process.env.JWT_SECRET_KEY, {
-    expiresIn: 3600000,
+  const token = JWT.sign(userPayload, process.env.JWT_SECRET_KEY, {
+    expiresIn: "4h",
   });
+  // console.log(token)
 
   return res.json({
     user: userPayload,
     token,
   });
+});
+
+// DELETE route to delete the user's account
+router.delete("/delete/:id", checkAuth, async (req, res) => {  
+  const userId = req.user.id;
+  
+  try {
+    // Delete user from database
+    const deletedUser = await prisma.user.delete({
+      where: {
+        id: userId,
+      },
+    });
+
+    // Respond with a success message
+    return res.json({
+      msg: "Account deleted successfully",
+      deletedUser,
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      errors: [{ msg: "Error deleting account" }],
+    });
+  }
 });
 
 router.get("/me", async (req, res) => {

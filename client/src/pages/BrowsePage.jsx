@@ -23,8 +23,7 @@ export default function BrowsePage() {
       if (observer.current) observer.current.disconnect();
       observer.current = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting) {
-          setOffset(offset + 12);
-          // console.log("intersecting");
+          setOffset(offset + 12);          
         }
       });
 
@@ -34,7 +33,7 @@ export default function BrowsePage() {
   );
 
   return (
-    <div>
+    <div className="bg-neutral-200">
       <NavBar />
       <Billboard />
       <div className="pb-5">

@@ -1,6 +1,6 @@
 import MovieCard from "./MovieCard";
 
-export default function MovieList({ movies, lastElementRef }) {
+export default function MovieList({ movies, lastElementRef }) {  
   return (
     <div className="px-12 mt-4 space-y-8">
       <div>
@@ -12,7 +12,7 @@ export default function MovieList({ movies, lastElementRef }) {
               movie={movie}
               lastElementRef={
                 movies.length === index + 1 ? lastElementRef : null
-              }
+              }              
             />
           ))}
         </div>

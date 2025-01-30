@@ -10,8 +10,9 @@ const MovieCard = ({ movie, lastElementRef }) => {
 
   return (
     <div
-      className="group bg-zinc-900 col-span relative h-[12vw] w-[24%]"
+      className="group bg-zinc-900 col-span relative h-[12vw] w-[24%] rounded"
       ref={lastElementRef}
+      onClick={() => navigate(`/browse/watch/${id}`)}
     >
       <img
         src={thumbnailUrl}

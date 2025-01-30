@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthFormContext } from "../pages/LoginPage";
+import { AuthFormContext } from "../context/AuthContext";
 
 
 export default function Input({ id, label, type, name, validate }) {

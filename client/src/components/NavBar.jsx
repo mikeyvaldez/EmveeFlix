@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 
 const tabs = [
@@ -14,12 +15,12 @@ const tabs = [
 ];
 
 export default function NavBar() {
-  const { user, isLoading } = useSelector(
-    (state) => state.user.value
-  );
-  const { logout } = useAuth();
+  const { user, isLoading } = useSelector((state) => state.user.value);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { logout, deleteUser } = useAuth();
   const [showBackground, setShowBackground] = useState(false);
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -30,13 +31,11 @@ export default function NavBar() {
       }
     });
   }, []);
+ 
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  }  
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-  return (    
+  return (
     <nav className="w-full fixed z-40">
       <div
         className={`px-16 py-6 flex items-center ${
@@ -59,13 +58,38 @@ export default function NavBar() {
             </div>
           ))}
         </div>
+
         {user && !isLoading && (
-          <div>
-            <div className="text-white hover:text-gray-300 cursor-pointer ml-auto">
-              <p onClick={handleLogout}>Logout</p>              
-            </div>
+          <div className="relative">
+            {/* Hamburger Icon */}
+            <button
+              className="p-2 text-3xl text-white rounded-md lg"
+              onClick={toggleMenu}
+            >
+              <GiHamburgerMenu className="text-3xl hover:text-4xl"/>
+            </button>
+
+            {/* Dropdown Menu */}
+            {isMenuOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-gray-800 text-white rounded-md shadow-lg">
+                <div className="px-4 py-2">{user.username}</div>{" "}                
+                <div
+                  className="px-4 py-2 hover:bg-gray-700 cursor-pointer"
+                  onClick={logout}
+                >
+                  Logout
+                </div>
+                <div
+                  className="px-4 py-2 hover:bg-gray-700 cursor-pointer"
+                  onClick={deleteUser}
+                >
+                  Delete Account
+                </div>
+              </div>
+            )}
           </div>
         )}
+        
       </div>
     </nav>
   );

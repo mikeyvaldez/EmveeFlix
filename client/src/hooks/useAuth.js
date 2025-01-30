@@ -24,7 +24,7 @@ const useAuth = () => {
     return response.data;
   };
 
-  const signup = async ({ email, password, username, }) => {
+  const signup = async ({ email, password, username }) => {
     const response = await axios.post("/api/auth/signup", {
       email,
       password,
@@ -74,7 +74,39 @@ const useAuth = () => {
     return dispatch(clearUser());
   };
 
-  return { signup, login, logout, fetchUser };
+  const deleteUser = async () => {
+    try {
+      const sessionToken = cookie.get("session_token");
+
+      // Make sure token exists
+      if (!sessionToken) {
+        console.error("No token provided");
+        return;
+      }
+
+      const user = await fetchUser();
+      const userId = user;
+
+      // Send DELETE request to the API endpoint
+      const response = await axios.delete(`/api/auth/delete/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${sessionToken}`,
+        },
+      });
+
+     
+      cookie.remove("session_token");
+      return dispatch(clearUser())
+    } catch (error) {
+      // Handle error
+      console.error(
+        "Error deleting user:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
+  return { signup, login, logout, fetchUser, deleteUser };
 };
 
 export default useAuth;

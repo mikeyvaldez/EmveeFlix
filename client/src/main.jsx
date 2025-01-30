@@ -9,15 +9,22 @@ import { Provider } from 'react-redux'
 import { store } from "./store/store.js"
 import WatchPage from './pages/WatchPage.jsx'
 import PlansPage from './pages/PlansPage.jsx'
+import PrivateRoutes from './utils/PrivateRoutes.jsx'
+import SignupPage from './pages/SignupPage.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<LoginPage />} />      
-      <Route path="/browse" element={<BrowsePage />} />      
-      <Route path="/browse/watch/:id" element={<WatchPage />} />
-      <Route path="/plans" element={<PlansPage />} />
+      <Route path="/signup" element={<SignupPage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/plans" element={<PrivateRoutes />}>
+        <Route path="/plans" element={<PlansPage />} />
+      </Route>
+      <Route path="/browse" element={<PrivateRoutes />}>
+        <Route path="/browse" element={<BrowsePage />} />
+        <Route path="/browse/watch/:id" element={<WatchPage />} />
+      </Route>
     </Route>
   )
 )

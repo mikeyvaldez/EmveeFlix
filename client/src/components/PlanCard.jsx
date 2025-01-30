@@ -12,7 +12,7 @@ export default function PlanCard({ plan, setSelectedSession, selectedSession }) 
 
   return (
     <div
-      className={`border rounded p-3 h-[350px] w-full pointer mr-3 cursor-pointer ${
+      className={`border rounded p-3 h-[350px] w-full pointer mr-3 cursor-pointer bg-white ${
         selectedSession === plan.price.id ? "border-3 border-black" : null
       }`}
       onClick={() => setSelectedSession(plan.price.id)}

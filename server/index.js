@@ -13,9 +13,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (req, res) => {
-  return res.send("HELLO WORLD");
-});
+// app.get("/", (req, res) => {
+//   return res.send("HELLO WORLD");
+// });
 
 app.use("/api", moviesRoutes);
 app.use("/api/auth", authRoutes);
