@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://emveeflix-api.onrender.com",
+        target: "http://localhost:8080",
         secure: false,
       }
     }
